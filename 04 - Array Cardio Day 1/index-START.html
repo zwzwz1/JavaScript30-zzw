@@ -35,32 +35,54 @@
       'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
-    
-    // Array.prototype.filter()
-    // 1. Filter the list of inventors for those who were born in the 1500's
 
-    // Array.prototype.map()
-    // 2. Give us an array of the inventors first and last names
+//     数组原型 filter（）
+//        1 过滤 1500 年代出生的发明家名单
+    const _1500 = inventors.filter(item => item.year >= 1500 && item.year < 1600)
+    console.table(_1500)
+// 数组原型 map（）
+//        2 给我们一个发明人名字和姓氏的数组
+    const fullNames = inventors.map(item => `${item.first} ${item.last}`)
+    console.log(fullNames)
+// 数组原型 sort（）
+//        3 按出生日期从最年长到最年轻的对发明人进行排序
+    const sort = inventors.sort((a, b) =>   b.year- a.year)
+    console.table(sort)
+// 数组原型 reduce（）
+//        4 所有发明家都一起生活了多少年呢？
+const ans = inventors.reduce((count , item)=>{
+  return count + (item.passed - item.year)
+},0)
+console.log(ans)
+// 5 按寿命对发明家进行排序
+const oldest = inventors.sort(function(a,b){
+  const aO = a.passed - a.year;
+  const bO = b.passed - b.year;
+  return aO - bO
+})
+console.table(oldest)
+// 6 创建名称中任意位置包含 'de' 的巴黎林荫大道列表
+//        https： en wikipedia org wiki 分类：巴黎的林荫大道
 
-    // Array.prototype.sort()
-    // 3. Sort the inventors by birthdate, oldest to youngest
-
-    // Array.prototype.reduce()
-    // 4. How many years did all the inventors live all together?
-
-    // 5. Sort the inventors by years lived
-
-    // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
-    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
-
-    // 7. sort Exercise
-    // Sort the people alphabetically by last name
-
-    // 8. Reduce Exercise
-    // Sum up the instances of each of these
+// 7 sort 练习
+//        按姓氏的字母顺序对人员进行排序
+const alpha = people.sort((lastOne, nextOne) => {
+      const [aLast, aFirst] = lastOne.split(', ');
+      const [bLast, bFirst] = nextOne.split(', ');
+      return aLast > bLast ? 1 : -1;
+    });
+    console.log(alpha);
+// 8 减少运动
+//        对每个实例的实例求和
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const res = data.reduce(function(obj , item){
+      if(!obj[item]){
+        obj[item] = 0
+      }
+      obj[item]++
+      return obj
+    } ,{})
+    console.log(res)
   </script>
 </body>
 </html>
